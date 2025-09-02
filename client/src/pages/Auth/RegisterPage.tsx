@@ -56,19 +56,19 @@ const RegisterPage: React.FC = () => {
 
   const riskProfiles = [
     {
-      value: 'conservative',
+      value: 'conservador',
       label: 'Conservador',
       description: '1-2% por apuesta, máximo 5% del bankroll',
       icon: Shield,
     },
     {
-      value: 'moderate',
+      value: 'balanceado',
       label: 'Moderado',
       description: '2-3% por apuesta, máximo 8% del bankroll',
       icon: TrendingUp,
     },
     {
-      value: 'aggressive',
+      value: 'agresivo',
       label: 'Agresivo',
       description: '3-5% por apuesta, máximo 12% del bankroll',
       icon: Target,
