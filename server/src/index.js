@@ -65,10 +65,12 @@ app.use('*', (req, res) => {
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor Reto Disciplina ejecutándose en puerto ${PORT}`);
-  console.log(`📊 API disponible en: http://localhost:${PORT}/api`);
-  console.log(`🏥 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`📊 API disponible en: http://0.0.0.0:${PORT}/api`);
+  console.log(`🏥 Health check: http://0.0.0.0:${PORT}/api/health`);
+  console.log(`🌍 NODE_ENV: ${process.env.NODE_ENV}`);
+  console.log(`🔗 DATABASE_URL configurada: ${process.env.DATABASE_URL ? 'SÍ' : 'NO'}`);
 });
 
 module.exports = app;
