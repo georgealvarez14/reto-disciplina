@@ -1,25 +1,25 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { authAPI } from './utils/api';
+import { authAPI } from './utils/api.ts';
 
 // Context
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext.tsx';
 
 // Components
-import Layout from './components/Layout/Layout';
-import LoadingSpinner from './components/UI/LoadingSpinner';
-import MentorMessage from './components/UI/MentorMessage';
+import Layout from './components/Layout/Layout.tsx';
+import LoadingSpinner from './components/UI/LoadingSpinner.tsx';
+import MentorMessage from './components/UI/MentorMessage.tsx';
 
 // Pages
-import LoginPage from './pages/Auth/LoginPage';
-import RegisterPage from './pages/Auth/RegisterPage';
-import DashboardPage from './pages/Dashboard/DashboardPage';
-import BankrollsPage from './pages/Bankrolls/BankrollsPage';
-import WagersPage from './pages/Wagers/WagersPage';
-import AnalyticsPage from './pages/Analytics/AnalyticsPage';
-import SimulatorPage from './pages/Simulator/SimulatorPage';
-import SettingsPage from './pages/Settings/SettingsPage';
+import LoginPage from './pages/Auth/LoginPage.tsx';
+import RegisterPage from './pages/Auth/RegisterPage.tsx';
+import DashboardPage from './pages/Dashboard/DashboardPage.tsx';
+import BankrollsPage from './pages/Bankrolls/BankrollsPage.tsx';
+import WagersPage from './pages/Wagers/WagersPage.tsx';
+import AnalyticsPage from './pages/Analytics/AnalyticsPage.tsx';
+import SimulatorPage from './pages/Simulator/SimulatorPage.tsx';
+import SettingsPage from './pages/Settings/SettingsPage.tsx';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
