@@ -10,8 +10,7 @@
     "setup-db": "node src/database/setup.js",
     "migrate": "node src/database/migrate.js",
     "seed": "node src/database/seed.js",
-    "build": "echo 'No build step required for Node.js'",
-    "postinstall": "npm run setup-db"
+    "build": "echo 'No build step required for Node.js'"
   },
   "dependencies": {
     "express": "^4.18.2",
