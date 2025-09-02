@@ -89,13 +89,13 @@ const Layout: React.FC = () => {
           <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = isActiveRoute(item.path);
+              const isActive = isActiveRoute(item.href);
               
               return (
                 <button
-                  key={item.path}
+                  key={item.href}
                   onClick={() => {
-                    navigate(item.path);
+                    navigate(item.href);
                     setSidebarOpen(false);
                   }}
                   className={`

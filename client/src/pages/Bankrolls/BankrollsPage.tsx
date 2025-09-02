@@ -15,7 +15,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { bankrollAPI } from '../../utils/api';
 import { formatCurrency, formatPercentage } from '../../utils/api';
-import { Bankroll, CreateBankrollRequest } from '../../types';
+import { Bankroll, CreateBankrollForm } from '../../types';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import MentorMessage from '../../components/UI/MentorMessage';
 import { toast } from 'react-hot-toast';
@@ -38,14 +38,14 @@ const BankrollsPage: React.FC = () => {
 
   const { data: bankrollsData, isLoading } = useQuery(
     'bankrolls',
-    () => bankrollAPI.getBankrolls(),
+    () => bankrollAPI.getAll(),
     {
       staleTime: 2 * 60 * 1000, // 2 minutes
     }
   );
 
   const createBankrollMutation = useMutation(
-    (data: CreateBankrollRequest) => bankrollAPI.createBankroll(data),
+    (data: CreateBankrollForm) => bankrollAPI.create(data),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('bankrolls');
@@ -59,7 +59,7 @@ const BankrollsPage: React.FC = () => {
   );
 
   const deleteBankrollMutation = useMutation(
-    (id: number) => bankrollAPI.deleteBankroll(id),
+    (id: number) => bankrollAPI.delete(id),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('bankrolls');
@@ -80,12 +80,14 @@ const BankrollsPage: React.FC = () => {
 
   const onSubmit = (data: CreateBankrollFormData) => {
     createBankrollMutation.mutate({
-      ...data,
-      initialAmount: Number(data.initialAmount),
-      unitSize: Number(data.unitSize),
+      name: data.name,
+      startAmount: Number(data.initialAmount),
+      unitSizePct: Number(data.unitSize),
+      strategy: data.stakingStrategy as 'flat' | 'percentage' | 'kelly',
+      stoplossDaily: Number(data.stopLossPercentage),
+      stopwinDaily: Number(data.stopWinPercentage),
       maxDailyBets: Number(data.maxDailyBets),
-      stopLossPercentage: Number(data.stopLossPercentage),
-      stopWinPercentage: Number(data.stopWinPercentage),
+      maxOddsAllowed: 10, // Default value
     });
   };
 
@@ -100,7 +102,7 @@ const BankrollsPage: React.FC = () => {
 
     const bankrolls = bankrollsData.bankrolls;
     const totalBankrolls = bankrolls.length;
-    const profitableBankrolls = bankrolls.filter(b => b.currentAmount > b.initialAmount).length;
+    const profitableBankrolls = bankrolls.filter((b: any) => b.currentAmount > b.startAmount).length;
 
     if (totalBankrolls === 0) {
       return {
@@ -168,9 +170,9 @@ const BankrollsPage: React.FC = () => {
       {/* Bankrolls Grid */}
       {bankrollsData?.bankrolls && bankrollsData.bankrolls.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {bankrollsData.bankrolls.map((bankroll) => {
-            const profit = bankroll.currentAmount - bankroll.initialAmount;
-            const profitPercentage = (profit / bankroll.initialAmount) * 100;
+          {bankrollsData.bankrolls.map((bankroll: any) => {
+            const profit = bankroll.currentAmount - bankroll.startAmount;
+            const profitPercentage = (profit / bankroll.startAmount) * 100;
             const isProfitable = profit >= 0;
 
             return (

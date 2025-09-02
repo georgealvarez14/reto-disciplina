@@ -227,7 +227,7 @@ const AnalyticsPage: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Rendimiento por Deporte</h3>
           {metrics?.sportBreakdown && metrics.sportBreakdown.length > 0 ? (
             <div className="space-y-3">
-              {metrics.sportBreakdown.map((sport) => (
+              {metrics.sportBreakdown.map((sport: any) => (
                 <div key={sport.sport} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div className="flex-1">
                     <p className="font-medium text-gray-900 capitalize">{sport.sport}</p>
@@ -255,7 +255,7 @@ const AnalyticsPage: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Insights del Mentor</h3>
           {insights?.insights && insights.insights.length > 0 ? (
             <div className="space-y-4">
-              {insights.insights.map((insight, index) => (
+              {insights.insights.map((insight: any, index: number) => (
                 <div key={index} className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                   <h4 className="font-medium text-blue-900 mb-2">{insight.title}</h4>
                   <p className="text-sm text-blue-800">{insight.message}</p>
@@ -323,7 +323,7 @@ const AnalyticsPage: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Rendimiento Mensual</h3>
             <div className="space-y-3">
               {metrics.monthlyBreakdown && metrics.monthlyBreakdown.length > 0 ? (
-                metrics.monthlyBreakdown.slice(0, 6).map((month) => (
+                metrics.monthlyBreakdown.slice(0, 6).map((month: any) => (
                   <div key={month.month} className="flex justify-between items-center">
                     <span className="text-gray-600">{month.month}</span>
                     <span className={`font-medium ${month.roi >= 0 ? 'text-success-600' : 'text-danger-600'}`}>

@@ -31,14 +31,14 @@ const WagersPage: React.FC = () => {
 
   const { data: wagersData, isLoading } = useQuery(
     ['wagers', filters],
-    () => wagerAPI.getWagers(filters),
+    () => wagerAPI.getAll(filters),
     {
       staleTime: 2 * 60 * 1000,
     }
   );
 
   const closeWagerMutation = useMutation(
-    ({ id, outcome }: { id: number; outcome: string }) => wagerAPI.closeWager(id, outcome),
+    ({ id, outcome }: { id: number; outcome: string }) => wagerAPI.close(id, { status: outcome }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('wagers');
@@ -55,9 +55,9 @@ const WagersPage: React.FC = () => {
 
     const wagers = wagersData.wagers;
     const totalWagers = wagers.length;
-    const wonWagers = wagers.filter(w => w.status === 'won').length;
-    const lostWagers = wagers.filter(w => w.status === 'lost').length;
-    const activeWagers = wagers.filter(w => w.status === 'active').length;
+    const wonWagers = wagers.filter((w: any) => w.status === 'won').length;
+    const lostWagers = wagers.filter((w: any) => w.status === 'lost').length;
+    const activeWagers = wagers.filter((w: any) => w.status === 'active').length;
 
     if (totalWagers === 0) {
       return {
@@ -235,7 +235,7 @@ const WagersPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {wagersData.wagers.map((wager) => (
+                {wagersData.wagers.map((wager: any) => (
                   <tr key={wager.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>

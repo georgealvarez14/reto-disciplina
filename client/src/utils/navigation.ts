@@ -10,32 +10,32 @@ import { NavItem } from '../types';
 
 export const getNavItems = (): NavItem[] => [
   {
-    path: '/dashboard',
+    href: '/dashboard',
     label: 'Dashboard',
     icon: Home,
   },
   {
-    path: '/bankrolls',
+    href: '/bankrolls',
     label: 'Mis Bancas',
     icon: Wallet,
   },
   {
-    path: '/wagers',
+    href: '/wagers',
     label: 'Apuestas',
     icon: Target,
   },
   {
-    path: '/analytics',
+    href: '/analytics',
     label: 'Analítica',
     icon: BarChart3,
   },
   {
-    path: '/simulator',
+    href: '/simulator',
     label: 'Simulador',
     icon: Play,
   },
   {
-    path: '/settings',
+    href: '/settings',
     label: 'Configuración',
     icon: Settings,
   },

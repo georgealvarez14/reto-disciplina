@@ -25,7 +25,7 @@ const SettingsPage: React.FC = () => {
   const [profileData, setProfileData] = useState({
     email: user?.email || '',
     currency: user?.currency || 'USD',
-    riskProfile: user?.riskProfile || 'moderate',
+    riskProfile: user?.riskProfile || 'balanceado',
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -224,12 +224,12 @@ const SettingsPage: React.FC = () => {
                   </label>
                   <select
                     value={profileData.riskProfile}
-                    onChange={(e) => setProfileData({ ...profileData, riskProfile: e.target.value })}
+                    onChange={(e) => setProfileData({ ...profileData, riskProfile: e.target.value as 'conservador' | 'balanceado' | 'agresivo' })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
-                    <option value="conservative">Conservador</option>
-                    <option value="moderate">Moderado</option>
-                    <option value="aggressive">Agresivo</option>
+                    <option value="conservador">Conservador</option>
+                    <option value="balanceado">Balanceado</option>
+                    <option value="agresivo">Agresivo</option>
                   </select>
                 </div>
               </div>

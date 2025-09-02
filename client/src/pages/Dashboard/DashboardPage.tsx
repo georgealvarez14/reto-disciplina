@@ -28,7 +28,7 @@ const DashboardPage: React.FC = () => {
 
   const { data: bankrolls, isLoading: bankrollsLoading } = useQuery(
     'dashboard-bankrolls',
-    () => bankrollAPI.getBankrolls(),
+    () => bankrollAPI.getAll(),
     {
       staleTime: 5 * 60 * 1000, // 5 minutes
     }
@@ -44,8 +44,8 @@ const DashboardPage: React.FC = () => {
     );
   }
 
-  const totalBankroll = bankrolls?.bankrolls?.reduce((sum, bankroll) => sum + bankroll.currentAmount, 0) || 0;
-  const totalProfit = bankrolls?.bankrolls?.reduce((sum, bankroll) => sum + (bankroll.currentAmount - bankroll.initialAmount), 0) || 0;
+  const totalBankroll = bankrolls?.bankrolls?.reduce((sum: number, bankroll: any) => sum + bankroll.currentAmount, 0) || 0;
+  const totalProfit = bankrolls?.bankrolls?.reduce((sum: number, bankroll: any) => sum + (bankroll.currentAmount - bankroll.startAmount), 0) || 0;
   const totalROI = totalBankroll > 0 ? ((totalProfit / (totalBankroll - totalProfit)) * 100) : 0;
 
   const getMentorMessage = () => {
@@ -203,7 +203,7 @@ const DashboardPage: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Apuestas Recientes</h3>
           {metrics?.recentWagers && metrics.recentWagers.length > 0 ? (
             <div className="space-y-3">
-              {metrics.recentWagers.slice(0, 5).map((wager) => (
+              {metrics.recentWagers.slice(0, 5).map((wager: any) => (
                 <div key={wager.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div className="flex-1">
                     <p className="font-medium text-gray-900">{wager.description}</p>

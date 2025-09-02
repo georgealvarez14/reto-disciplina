@@ -52,7 +52,7 @@ const SimulatorPage: React.FC = () => {
   });
 
   const ladderSimulationMutation = useMutation(
-    (params: LadderSimulationParams) => simulatorAPI.simulateLadder(params),
+    (params: LadderSimulationParams) => simulatorAPI.ladderSimulation(params),
     {
       onSuccess: (data) => {
         toast.success('Simulación completada');
@@ -65,7 +65,7 @@ const SimulatorPage: React.FC = () => {
   );
 
   const bankrollSimulationMutation = useMutation(
-    (params: BankrollSimulationParams) => simulatorAPI.simulateBankroll(params),
+    (params: BankrollSimulationParams) => simulatorAPI.bankrollSimulation(params),
     {
       onSuccess: (data) => {
         toast.success('Simulación completada');
