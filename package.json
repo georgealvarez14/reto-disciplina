@@ -1,0 +1,23 @@
+{
+  "name": "reto-disciplina",
+  "version": "1.0.0",
+  "description": "Gestor de Banca y Mentor de Apuestas - Reto Disciplina",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "setup-db": "cd server && npm run setup-db",
+    "test": "npm run test:server && npm run test:client",
+    "test:server": "cd server && npm test",
+    "test:client": "cd client && npm test"
+  },
+  "keywords": ["betting", "bankroll", "management", "discipline", "mentor"],
+  "author": "Mentor IA",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
