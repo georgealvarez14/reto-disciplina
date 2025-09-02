@@ -444,8 +444,8 @@ router.post('/:id/close', authorizeResource('wager'), async (req, res, next) => 
       RETURNING *
     `;
 
-    const result = await query(updateQuery, updateValues);
-    const wager = result.rows[0];
+    const queryResult = await query(updateQuery, updateValues);
+    const wager = queryResult.rows[0];
 
     // Actualizar banca
     await updateBankrollAfterWager(wager);
